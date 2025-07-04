@@ -3,43 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Dashboard - Login</title>
+    <title>Login - Support Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="login-container">
-        <form class="login-form fade-in" id="loginForm">
+        <form class="login-form fade-in" id="login-form">
             <h2>Support Dashboard</h2>
+            <p style="text-align: center; color: #718096; margin-bottom: 30px;">
+                Sign in to access the customer support system
+            </p>
+            
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Enter your email"
+                    required
+                    autocomplete="email"
+                >
             </div>
+            
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required placeholder="Enter your password">
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter your password"
+                    required
+                    autocomplete="current-password"
+                >
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            
+            <button type="submit" class="btn btn-primary">
+                Sign In
+            </button>
+            
+            <div style="text-align: center; margin-top: 20px; color: #718096; font-size: 0.9rem;">
+                <p>Demo credentials: Any email and password will work</p>
+            </div>
         </form>
     </div>
-
+    
     <script src="main.js"></script>
-    <script>
-        // Handle login form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            // Simple validation (no real authentication)
-            if (email && password) {
-                console.log('Login attempt:', { email, password });
-                // Redirect to tickets page
-                window.location.href = 'tickets.html';
-            } else {
-                alert('Please fill in all fields');
-            }
-        });
-    </script>
 </body>
 </html>

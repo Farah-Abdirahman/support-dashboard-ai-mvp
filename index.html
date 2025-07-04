@@ -11,13 +11,17 @@
     <div class="login-container">
         <div class="login-form fade-in">
             <h2>Support Dashboard</h2>
-            <p>Redirecting to login...</p>
-            <p>If you're not redirected automatically, <a href="login.html">click here</a>.</p>
+            <p style="text-align: center; color: #718096;">
+                Redirecting to login page...
+            </p>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="login.html" class="btn btn-primary">Go to Login</a>
+            </div>
         </div>
     </div>
     
     <script>
-        // Fallback redirect
+        // Fallback redirect in case meta refresh doesn't work
         setTimeout(() => {
             window.location.href = 'login.html';
         }, 1000);

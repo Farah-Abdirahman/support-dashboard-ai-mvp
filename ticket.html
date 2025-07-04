@@ -3,185 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Dashboard - Ticket Details</title>
+    <title>Ticket Details - Support Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <a href="tickets.html" class="nav-link">← Back to Tickets</a>
+        <div class="header fade-in">
+            <h1>Ticket Details</h1>
+            <p>Review and manage customer support request</p>
+            <div style="margin-top: 15px;">
+                <a href="tickets.html" class="nav-link">← Back to Tickets</a>
+            </div>
+        </div>
         
-        <div class="ticket-detail fade-in" id="ticketDetail">
-            <!-- Ticket details will be loaded here -->
+        <!-- Ticket Information -->
+        <div class="ticket-detail fade-in" id="ticket-detail">
+            <!-- Ticket details will be dynamically loaded here by JavaScript -->
         </div>
-
+        
+        <!-- Order Search Section -->
         <div class="search-section fade-in">
-            <h3>Order Search</h3>
-            <div class="form-group">
-                <input type="text" id="search-order" placeholder="Enter Order ID to search..." class="form-group input">
+            <h3>Order Lookup</h3>
+            <p style="color: #718096; margin-bottom: 15px;">
+                Search for order details to assist with this ticket
+            </p>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <input 
+                    type="text" 
+                    id="search-order" 
+                    placeholder="Enter Order ID (e.g., ORD-A12345)"
+                    style="flex: 1; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 16px;"
+                >
+                <button id="search-btn" class="btn btn-secondary" style="white-space: nowrap;">
+                    Search Order
+                </button>
             </div>
         </div>
-
+        
+        <!-- Action Buttons Section -->
         <div class="actions-section fade-in">
-            <h3>Actions</h3>
+            <h3>Ticket Actions</h3>
+            <p style="color: #718096; margin-bottom: 20px;">
+                Choose an action to resolve this customer support request
+            </p>
             <div class="action-buttons">
-                <button class="btn btn-refund" onclick="handleRefund()">Refund</button>
-                <button class="btn btn-escalate" onclick="handleEscalate()">Escalate</button>
-                <button class="btn btn-resolved" onclick="handleMarkResolved()">Mark Resolved</button>
+                <button class="btn btn-refund">
+                    💰 Process Refund
+                </button>
+                <button class="btn btn-escalate">
+                    ⬆️ Escalate to Supervisor
+                </button>
+                <button class="btn btn-resolved">
+                    ✅ Mark as Resolved
+                </button>
             </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(102, 126, 234, 0.05); border-radius: 10px; border-left: 4px solid #667eea;">
+                <p style="color: #4a5568; font-size: 0.9rem; margin: 0;">
+                    <strong>Note:</strong> All actions will be logged to the browser console for AI agent monitoring.
+                </p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 40px; text-align: center; color: #718096;">
+            <p>Support Dashboard MVP - AI Agent Ready</p>
         </div>
     </div>
-
+    
     <script src="main.js"></script>
-    <script>
-        // Mock detailed ticket data
-        const mockTicketDetails = {
-            'TICKET-001': {
-                id: 'TICKET-001',
-                customerName: 'Sarah Johnson',
-                orderId: 'ORD-A12345',
-                status: 'open',
-                timestamp: '2024-07-04 14:30:00',
-                messageBody: `Hi Support Team,
-
-I received my order yesterday (Order ID: ORD-A12345) and unfortunately, the product arrived completely damaged. The box was dented and the item inside was broken into several pieces.
-
-I've attached photos of the damage. This was supposed to be a gift for my daughter's birthday, and now I'm really disappointed. 
-
-Could you please process a full refund as soon as possible? I don't want a replacement since I need to find an alternative gift quickly.
-
-Thank you for your help.
-
-Best regards,
-Sarah Johnson
-Email: sarah.johnson@email.com
-Phone: (555) 123-4567`
-            },
-            'TICKET-002': {
-                id: 'TICKET-002',
-                customerName: 'Mike Chen',
-                orderId: 'ORD-B67890',
-                status: 'pending',
-                timestamp: '2024-07-04 11:15:00',
-                messageBody: `Hello,
-
-I placed an order 5 days ago (Order ID: ORD-B67890) with 2-day shipping, but I still haven't received my package. The tracking information hasn't been updated since it left the warehouse 3 days ago.
-
-I need this item for a work presentation tomorrow. Can you please help me track down where my package is and when I can expect to receive it?
-
-If it's going to be much longer, I might need to cancel and get a refund so I can find the item elsewhere.
-
-Thanks,
-Mike Chen
-mike.chen@company.com`
-            },
-            'TICKET-003': {
-                id: 'TICKET-003',
-                customerName: 'Emily Rodriguez',
-                orderId: 'ORD-C11111',
-                status: 'open',
-                timestamp: '2024-07-03 09:45:00',
-                messageBody: `Dear Customer Service,
-
-I noticed that I was charged twice for the same order (Order ID: ORD-C11111). I only placed one order, but my credit card shows two identical charges of $89.99 each.
-
-I've checked my account and there's only one order showing, so this seems to be a billing error on your end.
-
-Please refund one of the duplicate charges as soon as possible. I can provide screenshots of my credit card statement if needed.
-
-Thank you,
-Emily Rodriguez
-emily.rodriguez@gmail.com`
-            }
-        };
-
-        // Get ticket ID from URL parameters
-        function getTicketIdFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('id') || 'TICKET-001';
-        }
-
-        // Render ticket details
-        function renderTicketDetail() {
-            const ticketId = getTicketIdFromURL();
-            const ticket = mockTicketDetails[ticketId];
-            
-            if (!ticket) {
-                document.getElementById('ticketDetail').innerHTML = `
-                    <div style="text-align: center; padding: 40px;">
-                        <h2>Ticket Not Found</h2>
-                        <p>The requested ticket could not be found.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            const detailHTML = `
-                <div class="ticket-info">
-                    <div class="info-item">
-                        <div class="info-label">Ticket ID</div>
-                        <div class="info-value">${ticket.id}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Customer Name</div>
-                        <div class="info-value">${ticket.customerName}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Order ID</div>
-                        <div class="info-value">${ticket.orderId}</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Status</div>
-                        <div class="info-value">
-                            <span class="ticket-status status-${ticket.status}">${ticket.status}</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <h3 style="margin-bottom: 15px; color: #4a5568;">Message Details</h3>
-                <div class="message-body">${ticket.messageBody.replace(/\n/g, '<br>')}</div>
-            `;
-            
-            document.getElementById('ticketDetail').innerHTML = detailHTML;
-        }
-
-        // Action handlers
-        function handleRefund() {
-            const ticketId = getTicketIdFromURL();
-            const ticket = mockTicketDetails[ticketId];
-            const orderId = ticket ? ticket.orderId : 'Unknown';
-            
-            console.log(`Refund issued for order ${orderId}`);
-            alert(`Refund processed for order ${orderId}`);
-        }
-
-        function handleEscalate() {
-            const ticketId = getTicketIdFromURL();
-            console.log(`Ticket ${ticketId} escalated to senior support`);
-            alert(`Ticket ${ticketId} has been escalated to senior support team`);
-        }
-
-        function handleMarkResolved() {
-            const ticketId = getTicketIdFromURL();
-            console.log(`Ticket ${ticketId} marked as resolved`);
-            alert(`Ticket ${ticketId} has been marked as resolved`);
-        }
-
-        // Order search functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            renderTicketDetail();
-            
-            // Add search functionality
-            const searchInput = document.getElementById('search-order');
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    const orderId = this.value.trim();
-                    if (orderId) {
-                        console.log(`Searching for order: ${orderId}`);
-                        alert(`Searching for order: ${orderId}`);
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 </html>

@@ -3,72 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Dashboard - Tickets</title>
+    <title>Support Tickets - Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <header class="header fade-in">
+        <div class="header fade-in">
             <h1>Support Tickets Dashboard</h1>
             <p>Manage and resolve customer support requests</p>
-        </header>
-
-        <main class="tickets-grid" id="ticketsContainer">
-            <!-- Tickets will be loaded here by JavaScript -->
-        </main>
-    </div>
-
-    <script src="main.js"></script>
-    <script>
-        // Mock ticket data
-        const mockTickets = [
-            {
-                id: 'TICKET-001',
-                customerName: 'Sarah Johnson',
-                status: 'open',
-                snippet: 'I received a damaged product and need a refund. The package arrived with the item completely broken...',
-                timestamp: '2 hours ago'
-            },
-            {
-                id: 'TICKET-002',
-                customerName: 'Mike Chen',
-                status: 'pending',
-                snippet: 'My order was supposed to arrive yesterday but I haven\'t received it yet. Can you help track it?',
-                timestamp: '5 hours ago'
-            },
-            {
-                id: 'TICKET-003',
-                customerName: 'Emily Rodriguez',
-                status: 'open',
-                snippet: 'I was charged twice for the same order. Please help me get a refund for the duplicate charge...',
-                timestamp: '1 day ago'
-            }
-        ];
-
-        // Function to render tickets
-        function renderTickets() {
-            const container = document.getElementById('ticketsContainer');
-            
-            const ticketsHTML = mockTickets.map(ticket => `
-                <div class="ticket-card fade-in">
-                    <div class="ticket-header">
-                        <span class="ticket-id">${ticket.id}</span>
-                        <span class="ticket-status status-${ticket.status}">${ticket.status}</span>
-                    </div>
-                    <div class="customer-name">${ticket.customerName}</div>
-                    <div class="ticket-snippet">${ticket.snippet}</div>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <small style="color: #718096;">${ticket.timestamp}</small>
-                        <a href="ticket.html?id=${ticket.id}" class="btn btn-secondary">View Details</a>
-                    </div>
+            <div style="margin-top: 15px;">
+                <a href="login.html" class="nav-link">← Back to Login</a>
+            </div>
+        </div>
+        
+        <div class="tickets-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="color: #4a5568; margin: 0;">Recent Tickets</h2>
+                <div style="color: #718096; font-size: 0.9rem;">
+                    <span id="ticket-count">3</span> open tickets
                 </div>
-            `).join('');
+            </div>
             
-            container.innerHTML = ticketsHTML;
-        }
-
-        // Load tickets when page loads
-        document.addEventListener('DOMContentLoaded', renderTickets);
-    </script>
+            <div class="tickets-grid" id="tickets-container">
+                <!-- Tickets will be dynamically loaded here by JavaScript -->
+            </div>
+        </div>
+        
+        <div style="margin-top: 40px; text-align: center; color: #718096;">
+            <p>Support Dashboard MVP - Built for AI Agent Integration</p>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
 </body>
 </html>
