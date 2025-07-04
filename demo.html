@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Demo - Console Logging</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header fade-in">
+            <h1>🤖 AI Agent Demo</h1>
+            <p>Demonstrating console logging for automation</p>
+        </div>
+        
+        <div class="actions-section fade-in">
+            <h3>Simulate AI Agent Actions</h3>
+            <div class="action-buttons">
+                <button class="btn btn-refund" onclick="simulateRefund()">Simulate Refund Action</button>
+                <button class="btn btn-escalate" onclick="simulateEscalate()">Simulate Escalate Action</button>
+                <button class="btn btn-resolved" onclick="simulateResolve()">Simulate Resolve Action</button>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <h4>Order Search Simulation:</h4>
+                <input type="text" id="search-order" placeholder="AI Agent will type here..." class="form-group input">
+                <button class="btn btn-secondary" onclick="simulateSearch()">Simulate Search</button>
+            </div>
+        </div>
+        
+        <div class="ticket-detail fade-in">
+            <h3>Console Output Preview:</h3>
+            <div id="console-output" style="background: #1a202c; color: #68d391; padding: 20px; border-radius: 10px; font-family: monospace; min-height: 200px; overflow-y: auto;">
+                <div>🎫 Support Dashboard MVP</div>
+                <div>Dashboard loaded successfully. All actions will be logged to console.</div>
+                <div style="color: #90cdf4;">Ready for AI agent demonstration...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addToConsole(message, color = '#68d391') {
+            const output = document.getElementById('console-output');
+            const div = document.createElement('div');
+            div.style.color = color;
+            div.textContent = `> ${message}`;
+            output.appendChild(div);
+            output.scrollTop = output.scrollHeight;
+            
+            // Also log to real console
+            console.log(message);
+        }
+
+        function simulateRefund() {
+            addToConsole('Refund issued for order A12345', '#f6ad55');
+            addToConsole('Action: REFUND completed successfully', '#68d391');
+        }
+
+        function simulateEscalate() {
+            addToConsole('Ticket TICKET-001 escalated to senior support', '#f687b3');
+            addToConsole('Action: ESCALATE completed successfully', '#68d391');
+        }
+
+        function simulateResolve() {
+            addToConsole('Ticket TICKET-001 marked as resolved', '#4fd1c7');
+            addToConsole('Action: RESOLVE completed successfully', '#68d391');
+        }
+
+        function simulateSearch() {
+            const searchValue = document.getElementById('search-order').value || 'ORD-A12345';
+            addToConsole(`Searching for order: ${searchValue}`, '#90cdf4');
+            addToConsole('Order search completed', '#68d391');
+        }
+
+        // Auto-demo sequence
+        setTimeout(() => {
+            addToConsole('AI Agent connected to dashboard', '#a78bfa');
+        }, 1000);
+    </script>
+</body>
+</html>
