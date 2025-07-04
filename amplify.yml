@@ -4,9 +4,9 @@ frontend:
     build:
       commands:
         - echo "Building static support dashboard..."
-        - ls -la
+        - echo "No build process needed for static HTML/CSS/JS files"
   artifacts:
-    baseDirectory: .
+    baseDirectory: /
     files:
       - '**/*'
   cache:
